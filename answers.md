@@ -5,7 +5,9 @@ select concat(FirstName,' ' , LastName) as Names  , Email
 from Customers
 ```
 
-![alt text](image.png) 2. Write an SQL query to list all orders with their order dates and corresponding customer names.
+![alt text](image.png)
+
+2. Write an SQL query to list all orders with their order dates and corresponding customer names.
 
 ```sql
 select OrderID ,OrderDate , concat(FirstName,' ', LastName) as Customer_Names
@@ -143,8 +145,13 @@ group by ProductName
 15. Write an SQL query to list all customers who have made at least one purchase. Include their names and contact information.
 
 ```sql
-select Distinct FirstName,LastName,Email,Phone
+select  FirstName,LastName,Email,Phone,Address
 from Customers
-join Orders
-on Customers.CustomerID=Orders.CustomerID
+where exists (
+select 1
+from orders
+where orders.CustomerID=Customers.CustomerID
+);
 ```
+
+![alt text](image-10.png)
